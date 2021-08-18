@@ -3,7 +3,7 @@ import {
   UPLOAD_RECEIPT
 } from '../types'
 
-import { getErrors, getToastErrors, resetResponse, getResponse, showToast } from './commonActions'
+import { getToastErrors, resetResponse, getResponse } from './commonActions'
 
 export const uploadIcon = (data) => async dispatch => {
   dispatch(resetResponse())
@@ -17,10 +17,9 @@ export const uploadIcon = (data) => async dispatch => {
 
     dispatch({
       type: UPLOAD_RECEIPT,
-      payload: res.data.data
+      payload: res.data.receipt
     })
     dispatch(getResponse(res.data))
-    dispatch(showToast(res.data))
   } catch (error) {
     console.log(error)
     dispatch(getToastErrors(error.response.data))
