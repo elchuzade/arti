@@ -1,0 +1,56 @@
+.link {
+  
+  &-unstyled {
+    color: black;
+
+    &:hover {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
+
+.w-200 {
+  width: 200px !important;
+}
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #cddfea;
+}
+
+.border-radius-50 {
+  border-radius: 0.5rem;
+}
+
+.border-radius-1 {
+  border-radius: 1rem;
+}
+
+.border-radius-2 {
+  border-radius: 2rem;
+}
+
+.border-radius-3 {
+  border-radius: 3rem;
+}
+
+.video-radius-1 {
+  video {
+    border-radius: 1rem;
+  }
+}
+
+.video-radius-2 {
+  video {
+    border-radius: 2rem;
+  }
+}
+
+.video-radius-3 {
+  video {
+    border-radius: 3rem;
+  }
+}
