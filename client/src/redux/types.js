@@ -14,3 +14,6 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const GET_PROFILE = 'GET_PROFILE'
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
 export const DELETE_PROFILE = 'DELETE_PROFILE'
+
+/* ------ RECEIPTS ------ */
+export const UPLOAD_RECEIPT = 'UPLOAD_RECEIPT'

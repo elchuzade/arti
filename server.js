@@ -7,6 +7,7 @@ const app = express()
 
 const users = require('./routes/api/users')
 const profiles = require('./routes/api/profiles')
+const receipts = require('./routes/api/receipts')
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -31,6 +32,7 @@ require('./config/passport')(passport)
 // Use routes
 app.use('/api/v1/users', users)
 app.use('/api/v1/profiles', profiles)
+app.use('/api/v1/receipts', receipts)
 
 // Serve static assets if in production (Heroku stuff)
 if (process.env.NODE_ENV === 'production') {

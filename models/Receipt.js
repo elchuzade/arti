@@ -3,19 +3,66 @@ const Schema = mongoose.Schema
 
 const ReceiptSchema = new Schema(
   {
-    profile: {
+    user: {
       type: Schema.Types.ObjectId,
-      ref: 'profile'
+      ref: 'user'
     },
-    amount: {
-      type: Number
+    organizationName: {
+      text: {
+        type: String
+      },
+      confidence: {
+        type: Number
+      }
     },
     taxNumber: {
-      type: String
+      text: {
+        type: String
+      },
+      confidence: {
+        type: Number
+      }
     },
     date: {
-      type: Date
+      text: {
+        type: String
+      },
+      confidence: {
+        type: Number
+      }
     },
+    time: {
+      text: {
+        type: String
+      },
+      confidence: {
+        type: Number
+      }
+    },
+    // receiptNumber: {
+    //   text: {
+    //     type: String
+    //   },
+    //   confidence: {
+    //     type: Number
+    //   }
+    // },
+    // taxAmount: {
+    //   text: {
+    //     type: String
+    //   },
+    //   confidence: {
+    //     type: Number
+    //   }
+    // },
+    // totalAmount: {
+    //   text: {
+    //     type: String
+    //   },
+    //   confidence: {
+    //     type: Number
+    //   }
+    // },
     image: {
       location: {
         type: String

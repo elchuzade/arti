@@ -15,7 +15,7 @@ const s3 = new aws.S3()
 const uploadReceiptImage = multer({
   storage: multerS3({
     s3: s3,
-    bucket: process.env.NODE_ENV === 'production' ? 'arti' : 'arti-staging',
+    bucket: process.env.NODE_ENV === 'production' ? 'arti-main' : 'arti-staging',
     acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname })
@@ -32,4 +32,33 @@ const uploadReceiptImage = multer({
   }
 })
 
+function extractImageData (documentKey) {
+  return new Promise(resolve => {
+     var textract = new aws.Textract({
+       region: 'eu-central-1',
+       endpoint: `https://textract.eu-central-1.amazonaws.com/`,
+       accessKeyId: config.accessKeyId,
+       secretAccessKey: config.secretAccessKey
+     })
+     var params = {
+       Document: {
+         S3Object: {
+          Bucket: process.env.NODE_ENV === 'production' ? 'arti-main' : 'arti-staging',
+           Name: documentKey
+         }
+       },
+       FeatureTypes: ['RECEIPT']
+     }
+ 
+     textract.analyzeDocument(params, (err, data) => {
+       if (err) {
+         return resolve(err)
+       } else {
+         resolve(data)
+       }
+     })
+   })
+ }
+
+module.exports.extractImageData = extractImageData
 module.exports.uploadReceiptImage = uploadReceiptImage
