@@ -5,7 +5,16 @@ const Receipt = () => {
   const dispatch = useDispatch()
   return (
     <div>
-      <input type="file" name="image" accept="image/*" capture="environment"></input>
+      <label for="cameraFileInput">
+        <span class="btn">Open camera</span>
+
+        <input
+          id="cameraFileInput"
+          type="file"
+          accept="image/*"
+          capture="environment"
+        />
+      </label>
     </div>
   )
 }
