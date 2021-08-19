@@ -306,14 +306,24 @@ const extractTaxAndTotalAmount = blocks => {
       }
     }
   }
-
-  // Remove leading * and replace all . with , to keep consistent
+  
+  // Remove leading *
   candidates = candidates.map(uc => ({
       ...uc,
-      Text: uc.Text.substring(1).replace('.', ',')
+      Text: uc.Text.substring(1)
     })
   )
-  
+
+  // Replace last . with , to keep consistent
+  for (let i = 0; i < candidates.length; i++) {
+    // If last digit is a number then the third from the end must be a ','
+    // Sometimes it comes as a '.'
+    if (Validator.isInt(candidates[i].Text[candidates[i].Text.length - 1])) {
+      // Last character is a number, count to 3 form the end
+      candidates[i].Text[candidates[i].Text.length - 3] = ','
+    }
+  }
+
   let uniqueCandidates = []
   // Make them unique
   for (let i = 0; i < candidates.length; i++) {
@@ -326,6 +336,9 @@ const extractTaxAndTotalAmount = blocks => {
   let taxAmount = {}
   let totalAmount = {}
   
+  // Remove values that have blank space in them
+  uniqueCandidates = uniqueCandidates.filter(uc => !uc.Text.includes(' '))
+
   console.log(uniqueCandidates)
   if (uniqueCandidates.length === 2) {
     if (parseFloat(uniqueCandidates[0].Text) > parseFloat(uniqueCandidates[1].Text)) {
