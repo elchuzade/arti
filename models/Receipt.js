@@ -39,30 +39,30 @@ const ReceiptSchema = new Schema(
         type: Number
       }
     },
-    // receiptNumber: {
-    //   text: {
-    //     type: String
-    //   },
-    //   confidence: {
-    //     type: Number
-    //   }
-    // },
-    // taxAmount: {
-    //   text: {
-    //     type: String
-    //   },
-    //   confidence: {
-    //     type: Number
-    //   }
-    // },
-    // totalAmount: {
-    //   text: {
-    //     type: String
-    //   },
-    //   confidence: {
-    //     type: Number
-    //   }
-    // },
+    receiptNumber: {
+      text: {
+        type: String
+      },
+      confidence: {
+        type: Number
+      }
+    },
+    taxAmount: {
+      text: {
+        type: String
+      },
+      confidence: {
+        type: Number
+      }
+    },
+    totalAmount: {
+      text: {
+        type: String
+      },
+      confidence: {
+        type: Number
+      }
+    },
     image: {
       location: {
         type: String
