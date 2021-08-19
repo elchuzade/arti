@@ -296,16 +296,24 @@ const extractReceiptNumber = blocks => {
 }
 
 const extractTaxAndTotalAmount = blocks => {
-  const candidates = []
+  let candidates = []
   // Extract only values that have * and , in them
   for (let i = 0; i < blocks.length; i++) {
     if (blocks[i].Text) {
-      if (blocks[i].Text.includes('*') && blocks[i].Text.includes(',')) {
+      if ((blocks[i].Text.includes('*') || blocks[i].Text.includes('+')) &&
+      (blocks[i].Text.includes(',') || blocks[i].Text.includes('.'))) {
         candidates.push(blocks[i])
       }
     }
   }
 
+  // Remove leading * and replace all . with , to keep consistent
+  candidates = candidates.map(uc => ({
+      ...uc,
+      Text: uc.Text.substring(1).replace('.', ',')
+    })
+  )
+  
   let uniqueCandidates = []
   // Make them unique
   for (let i = 0; i < candidates.length; i++) {
@@ -314,15 +322,11 @@ const extractTaxAndTotalAmount = blocks => {
     }
   }
 
-  // Remove leading *
-  uniqueCandidates = uniqueCandidates.map(uc => ({
-      ...uc,
-      Text: uc.Text.substring(1)
-    })
-  )
   // Compare the float values to get taxAmount and totalAmount
   let taxAmount = {}
   let totalAmount = {}
+  
+  console.log(uniqueCandidates)
   if (uniqueCandidates.length === 2) {
     if (parseFloat(uniqueCandidates[0].Text) > parseFloat(uniqueCandidates[1].Text)) {
       totalAmount = uniqueCandidates[0]

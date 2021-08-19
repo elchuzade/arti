@@ -27,6 +27,7 @@ const Receipt = () => {
       formData.append('receiptImage', icon)
       setLoadingApply(true)
       dispatch(uploadIcon(formData))
+      setReceipt(null)
     }
   }
 
