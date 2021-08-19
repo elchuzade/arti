@@ -65,11 +65,11 @@ function App() {
       <div className='App'>
         <Navbar />
         <Switch>
-          <Route exact path='/' component={Landing} />
+          <Route exact path='/' component={Receipt} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
           <PrivateRoute exact path='/profile' component={Profile} />
-          <PrivateRoute exact path='/receipt' component={Receipt} />
+          <Route exact path='/receipt' component={Receipt} />
           {/* <PrivateRoute exact path='/games/:id' component={({ match }) => (<Game id={match.params.id} />)} /> */}
           <Route path='*' component={NotFound} />
         </Switch>
